@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const murmur = require('murmurhash3js-revisited');
+const murmur = require('murmurhash3js');
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; PhishCheck-Node/1.0)';
 
