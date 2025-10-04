@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Result</title>
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+  <div class="card">
+    <% if (error) { %>
+      <h2>Error</h2>
+      <pre><%= error %></pre>
+    <% } else { %>
+      <h2>Analyse: <%= result.target %></h2>
+
+      <h3>Heuristiques</h3>
+      <% if (result.heuristics && result.heuristics.length) { %>
+        <ul>
+          <% result.heuristics.forEach(h=>{ %>
+            <li><%= h %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>Aucune alerte heuristique.</p>
+      <% } %>
+
+      <h3>Favicon</h3>
+      <% if (result.favicon) { %>
+        <p>Trouvé: <a href="<%= result.favicon.found_at %>" target="_blank"><%= result.favicon.found_at %></a></p>
+        <p>Hash: <%= result.favicon.hash %> (size <%= result.favicon.size %>)</p>
+      <% } else if (result.favicon_error) { %>
+        <pre><%= result.favicon_error %></pre>
+      <% } else { %>
+        <p>Aucun favicon récupéré.</p>
+      <% } %>
+
+      <% if (result.shodan) { %>
+        <h3>Shodan</h3>
+        <pre><%= JSON.stringify(result.shodan, null, 2) %></pre>
+      <% } %>
+
+      <% if (result.virustotal) { %>
+        <h3>VirusTotal</h3>
+        <pre><%= JSON.stringify(result.virustotal, null, 2) %></pre>
+      <% } %>
+
+    <% } %>
+    <p><a href="/">Nouvelle analyse</a></p>
+  </div>
+</body>
+</html>
